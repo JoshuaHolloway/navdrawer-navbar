@@ -1,0 +1,49 @@
+$clr-not-selected: hsla(240, 6%, 57%, 1);
+$clr-not-selected-opaque: hsla(240, 6%, 57%, 0.7);
+
+$clr-selected: hsla(240, 100%, 98%, 1);
+$background-surface: hsla(240, 12%, 7%, 1);
+$background-primary: hsla(0, 0%, 0%, 1);
+
+// ==============================================
+// Chrome and Safari
+::-webkit-scrollbar {
+  // width: 3vw;
+  // @import 'breakpoints';
+  // @media only screen and (min-width: #{$sm}) {
+  //   width: 2vw;
+  // }
+  // @media only screen and (min-width: #{$md}) {
+  //   width: 1vw;
+  // }
+
+  // background: transparent; // rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; //$color-1;
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5); // hsla(0, 99%, 70%, 0.5);
+  border-radius: 100vw;
+  border: solid 0.2vw rgba(255, 255, 255, 0.2); //hsla(0, 99%, 70%, 0.2);
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: rgba(255, 255, 255, 0.7); //hsla(0, 99%, 70%, 0.7);
+// }
+// ==============================================
+
+// Firefox
+@supports (scrollbar-color: red blue) {
+  * {
+    // scrollbar-color: <thumb> <track>
+    scrollbar-color: $clr-not-selected transparent;
+    scrollbar-width: thin;
+  }
+}

@@ -1,0 +1,16 @@
+html {
+  height: 100vh;
+  background: red;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 90%;
+  background: yellow;
+}
+
+#root {
+  height: 90%;
+  background: purple;
+}

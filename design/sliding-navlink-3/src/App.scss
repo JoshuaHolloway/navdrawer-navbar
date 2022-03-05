@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+
+  .overflow-hidden {
+    position: relative;
+    height: 120px;
+    width: 100px;
+    background: white;
+    overflow: hidden;
+
+    .link {
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      background: black;
+      top: 120px;
+    }
+  }
+}
