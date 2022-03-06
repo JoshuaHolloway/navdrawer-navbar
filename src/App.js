@@ -27,8 +27,6 @@ export default function App() {
   const header_ref = useRef(null);
   const scroll_area_ref = useRef(null);
   const tl_ref = useRef(null);
-  const box_ref_1 = useRef(null);
-  const box_ref_2 = useRef(null);
 
   // ------------------------------------------------------
 
@@ -65,34 +63,59 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       if (mounted && opened === true) {
-        const box_1 = box_ref_1.current;
-        const box_2 = box_ref_2.current;
-
-        tl_ref.current = gsap
-          .timeline()
-          .to(box_1, {
-            y: '-100px',
-          })
-          .to(box_2, {
-            y: '-100px',
-          });
+        handler();
       }
     }, 200);
   }, [opened]);
 
   // ------------------------------------------------------
 
-  const scaleY = {
-    in: { opacity: 1, transform: 'scaleY(1)' },
-    out: { opacity: 0, transform: 'scaleY(0)' },
-    common: { transformOrigin: 'top' },
-    transitionProperty: 'transform, opacity',
+  // const scaleY = {
+  //   in: { opacity: 1, transform: 'scaleY(1)' },
+  //   out: { opacity: 0, transform: 'scaleY(0)' },
+  //   common: { transformOrigin: 'top' },
+  //   transitionProperty: 'transform, opacity',
+  // };
+
+  // ------------------------------------------------------
+
+  const links_ref = useRef([]); // links.current[n]
+  const tl_links_ref = useRef(null);
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('count: ', count);
+  }, [count]);
+
+  // ------------------------------------------------------
+
+  const links = [
+    { title: 'link 1', route: '/link-1' },
+    { title: 'link 2', route: '/link-2' },
+    { title: 'link 3', route: '/link-3' },
+    { title: 'link 4', route: '/link-4' },
+  ];
+
+  // ------------------------------------------------------
+
+  const handler = () => {
+    if (count === 0) {
+      tl_links_ref.current = gsap.timeline().to(links_ref.current, {
+        y: '-50px', // gsap transition === height of $link_h
+        ease: 'Back.easeOut',
+        stagger: 0.1,
+      });
+    } else {
+      tl_links_ref.current.reverse();
+    }
+    setCount((prev) => (prev + 1) % 2);
   };
 
   // ------------------------------------------------------
 
   return (
-    <>
+    <main className='page'>
       <ScrollArea viewportRef={scroll_area_ref} style={{ height: '100%' }}>
         <header
           ref={header_ref}
@@ -119,9 +142,7 @@ export default function App() {
       <Drawer
         opened={opened}
         onClose={() => {
-          if (tl_ref !== null) {
-            tl_ref.current.reverse();
-          }
+          handler();
           setTimeout(() => {
             setOpened(false);
           }, 1000);
@@ -131,56 +152,26 @@ export default function App() {
         size='xl'
         // transition={scaleY}
       >
-        <div
-          style={{
-            position: 'relative',
-            height: '100%',
-            width: '100%',
-            background: 'purple',
-          }}
-        >
-          <div
-            style={{
-              // position: 'absolute',
-              // top: '40%',
-              // left: '40%',
-              // transform: 'translateY(-50%) translateX(-50%)',
-              height: '50%',
-              width: '50%',
-              background: 'green',
-              // display: 'flex',
-              // flexDirection: 'column',
-              // justifyContent: 'space-evenly',
-              // alignItems: 'center',
-            }}
-          >
-            <div
-              style={{
-                overflow: 'hidden',
-                position: 'relative',
-                background: 'rgba(255, 0, 0, 0.5)',
-                width: '100px',
-              }}
-            >
-              <div
-                ref={box_ref_1}
-                className='box'
-                style={{
-                  zIndex: '10',
-                  // position: 'absolute',
-                  // top: '100px',
-                  height: '100px',
-                  width: '100px',
-                  background: 'black',
-                }}
-              >
-                BOX
-              </div>
+        <div className='page'>
+          <div className='drawer'>
+            <div className='container'>
+              {links.map((link, idx) => {
+                return (
+                  <div key={link.title} className='overflow-hidden'>
+                    <div
+                      className='link'
+                      ref={(el) => (links_ref.current[idx] = el)}
+                    >
+                      {link.title}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </Drawer>
-    </>
+    </main>
   );
 
   // ------------------------------------------------------

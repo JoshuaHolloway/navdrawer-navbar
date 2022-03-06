@@ -1,0 +1,55 @@
+$border: 5px;
+$h: calc(100% - calc(2 * #{$border}));
+$link_h: 50px;
+$overflow_h: calc(#{$link_h} + calc(0.2 * #{$link_h}));
+
+// .html { .body { #root {
+.page {
+  height: $h;
+  border: dashed blue $border;
+
+  .header {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background: rgba(20, 22, 24, 0);
+    display: relative;
+  }
+
+  .drawer {
+    height: $h;
+    width: 50%;
+    border: solid green $border;
+
+    .container {
+      height: $h;
+      border: solid black $border;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+
+      .overflow-hidden {
+        position: relative;
+        height: $overflow_h;
+        width: 100px;
+        overflow: hidden;
+        background: orange;
+
+        .link {
+          position: absolute;
+          top: $overflow_h;
+          height: $link_h;
+          width: 100%;
+          background: lightblue;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+// } } } // .html, .body, #root
