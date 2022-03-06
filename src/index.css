@@ -20,3 +20,8 @@ body {
   height: 100%;
   /* background: purple; */
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

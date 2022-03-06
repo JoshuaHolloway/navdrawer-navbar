@@ -91,10 +91,10 @@ export default function App() {
   // ------------------------------------------------------
 
   const links = [
-    { title: 'link 1', route: '/link-1' },
-    { title: 'link 2', route: '/link-2' },
-    { title: 'link 3', route: '/link-3' },
-    { title: 'link 4', route: '/link-4' },
+    { title: 'page 1', route: '/page-1' },
+    { title: 'page 2', route: '/page-2' },
+    { title: 'page 3', route: '/page-3' },
+    { title: 'page 4', route: '/page-4' },
   ];
 
   // ------------------------------------------------------
@@ -152,23 +152,20 @@ export default function App() {
         size='xl'
         // transition={scaleY}
       >
-        <div className='page'>
-          <div className='drawer'>
-            <div className='container'>
-              {links.map((link, idx) => {
-                return (
-                  <div key={link.title} className='overflow-hidden'>
-                    <div
-                      className='link'
-                      ref={(el) => (links_ref.current[idx] = el)}
-                    >
-                      {link.title}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+        <div className='container'>
+          {links.map((link, idx) => {
+            return (
+              <div key={link.title} className='overflow-hidden'>
+                <a
+                  href={link.route}
+                  className='link'
+                  ref={(el) => (links_ref.current[idx] = el)}
+                >
+                  {link.title}
+                </a>
+              </div>
+            );
+          })}
         </div>
       </Drawer>
     </main>
